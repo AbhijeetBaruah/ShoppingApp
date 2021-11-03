@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ManageOrdersComponent } from './admin/manage-orders/manage-orders.component';
 import { ManageProductsComponent } from './admin/manage-products/manage-products.component';
+import { AuthGuard } from './auth/auth-guard/auth-guard.service';
 import { LoginComponent } from './auth/login/login.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { HomeComponent } from './home/home.component';
@@ -13,7 +14,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'products',component:ProductsComponent},
-  {path:'check-out',component:CheckOutComponent},
+  {path:'check-out',component:CheckOutComponent,canActivate:[AuthGuard]},
   {path:'order-success',component:OrderSuccessComponent},
   {path:'shopping-cart',component:ShoppingCartComponent},
   {path:'login',component:LoginComponent},

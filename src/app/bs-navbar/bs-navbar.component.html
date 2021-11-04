@@ -16,10 +16,10 @@
           <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-expanded="false">{{username.displayName}} </a>
           <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
             <a ngbDropdownItem class="dropdown-item" routerLink="/my/orders">My Orders</a>
-            <a ngbDropdownItem class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
-            <a ngbDropdownItem class="dropdown-item" routerLink="/admin/products">Manage Products</a>
+            <a ngbDropdownItem *ngIf="isAdminVar" class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
+            <a ngbDropdownItem  *ngIf="isAdminVar" class="dropdown-item" routerLink="/admin/products">Manage Products</a>
+            <a ngbDropdownItem class="dropdown-item" routerLink="/roleprovider">Role Provider</a>
             <a ngbDropdownItem class="dropdown-item" (click)="logout()" >Log Out</a>
-
           </div>
         </li>
       </ul>

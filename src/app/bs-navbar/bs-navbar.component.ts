@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app'
 import { Subscription } from 'rxjs/internal/Subscription';
+import { map } from 'rxjs/operators';
+import { AdminGuard } from '../admin/admin-guard/admin-guard.service';
 import { AuthService } from '../auth/auth-service/auth.service';
 @Component({
   selector: 'bs-navbar',
@@ -11,12 +13,20 @@ import { AuthService } from '../auth/auth-service/auth.service';
 export class BsNavbarComponent implements OnInit,OnDestroy {
 
   username?:firebase.User;
-  subscription: Subscription;
-  constructor(private authService:AuthService) { 
-    this.subscription = authService.getUser().subscribe(user => this.username = user||undefined);
+  private subscription: Subscription[] =[];
+  isAdminVar:boolean=false;
+
+  constructor(private authService:AuthService,private adminGuard:AdminGuard) { 
+
+    this.subscription.push(authService.getUser().subscribe(user => this.username = user||undefined));
+
+    this.subscription.push(this.adminGuard.canActivate().subscribe(x=>{
+      this.isAdminVar = x||false;
+    }));
+
   }
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();//always unsubscribe to subscription to firebase
+    this.subscription.forEach(x=>x.unsubscribe())//always unsubscribe to subscription to firebase
   }
 
   ngOnInit(): void {

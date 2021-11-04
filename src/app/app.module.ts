@@ -21,6 +21,9 @@ import { LoginComponent } from './auth/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './auth/auth-service/auth.service';
 import { AuthGuard } from './auth/auth-guard/auth-guard.service';
+import { UserService } from './user/user.service';
+import { RoleProviderComponent } from './role-provider/role-provider.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -35,7 +38,8 @@ import { AuthGuard } from './auth/auth-guard/auth-guard.service';
     MyOrdersComponent,
     ManageProductsComponent,
     ManageOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    RoleProviderComponent
   ],
   imports: [
     BrowserModule,
@@ -43,11 +47,13 @@ import { AuthGuard } from './auth/auth-guard/auth-guard.service';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthService,
-    AuthGuard
+    AuthGuard,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

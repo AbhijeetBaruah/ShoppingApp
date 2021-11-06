@@ -43,6 +43,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
     this project version is 9.21.0 (to check run -> firebase --version)
  3) ng add @ng-bootstrap/ng-bootstrap
  4) npm i bootstrap@4.6.0
+ 5) npm i ng2-validation --save    (this is very useful library in adding custom validations very easily, works with Angular 12)
     
     
 

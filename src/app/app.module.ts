@@ -23,7 +23,11 @@ import { AuthService } from './auth/auth-service/auth.service';
 import { AuthGuard } from './auth/auth-guard/auth-guard.service';
 import { UserService } from './user/user.service';
 import { RoleProviderComponent } from './role-provider/role-provider.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './services/category/category.service';
+import { ProductService } from './services/product/product.service';
+import { CustomFormsModule } from 'ng2-validation';
 
 
 @NgModule({
@@ -39,21 +43,26 @@ import { ReactiveFormsModule } from '@angular/forms';
     ManageProductsComponent,
     ManageOrdersComponent,
     LoginComponent,
-    RoleProviderComponent
+    RoleProviderComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CustomFormsModule
   ],
   providers: [
     AuthService,
     AuthGuard,
-    UserService
+    UserService,
+    CategoryService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })

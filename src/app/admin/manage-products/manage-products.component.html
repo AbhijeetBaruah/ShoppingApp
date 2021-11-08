@@ -5,7 +5,7 @@
     <input #query class="form-control" (keyup)="filter(query.value)" type="text" placeholder="Search...">
 </p>
 
-<table class="table">
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
     <thead>
         <tr>
             <th>Title</th>
@@ -15,9 +15,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let product of products$ | async">
-            <td>{{$any(product.payload.val()).Title}} </td>
-            <td>{{$any(product.payload.val()).Price}} </td>
+        <tr *ngFor="let product of filteredProducts">
+            <td >{{product.Title}} </td>
+            <td>{{product.Price}} </td>
             <td>
                 <a [routerLink]="['/admin/products/',product.key]">Edit</a>
             </td>
@@ -27,4 +27,4 @@
         </tr>
     </tbody>
 </table>
-<!-- <button (click)="show()"class="btn btn-primary">show</button> -->
+

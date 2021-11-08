@@ -28,6 +28,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { CategoryService } from './services/category/category.service';
 import { ProductService } from './services/product/product.service';
 import { CustomFormsModule } from 'ng2-validation';
+import { DataTablesModule } from 'angular-datatables';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { CustomFormsModule } from 'ng2-validation';
     AngularFireAuthModule,
     NgbModule,
     ReactiveFormsModule,
-    CustomFormsModule
+    CustomFormsModule,
+    DataTablesModule
   ],
   providers: [
     AuthService,

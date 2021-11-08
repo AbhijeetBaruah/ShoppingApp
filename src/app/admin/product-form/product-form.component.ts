@@ -24,6 +24,8 @@ export class ProductFormComponent implements OnInit,OnDestroy {
               private router:Router,
               private activatedRoute:ActivatedRoute) {
     
+    
+
     this.categories$ = this.categoryService.getCategories();
 
     
@@ -76,7 +78,6 @@ export class ProductFormComponent implements OnInit,OnDestroy {
         x=>{ 
           
           this.product = x.payload.val() as ProductModel;
-          //this.product.key = x.key as string;
         },
         error=>{
             console.clear();

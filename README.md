@@ -44,6 +44,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
  3) ng add @ng-bootstrap/ng-bootstrap
  4) npm i bootstrap@4.6.0
  5) npm i ng2-validation --save    (this is very useful library in adding custom validations very easily, works with Angular 12)
+ 6) ng add angular-datatables       (this is useful in creating sortable ,searchable tables with pagination, some more featureful library is ngx-datatable)
     
     
 

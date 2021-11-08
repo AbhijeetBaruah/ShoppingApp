@@ -1,5 +1,5 @@
 export interface ProductModel{
-    //key?:string,
+    key?:string,
     Category?:string,
     Price?:string,
     ImageUrl?:string,

@@ -1,1 +1,30 @@
-<a routerLink="/admin/product/new" class="btn btn-primary">Add New Product</a>
+<div style="margin-bottom: 10px;">
+    <a routerLink="/admin/product/new" class="btn btn-primary">Add New Product</a>
+</div>
+<p>
+    <input #query class="form-control" (keyup)="filter(query.value)" type="text" placeholder="Search...">
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products$ | async">
+            <td>{{$any(product.payload.val()).Title}} </td>
+            <td>{{$any(product.payload.val()).Price}} </td>
+            <td>
+                <a [routerLink]="['/admin/products/',product.key]">Edit</a>
+            </td>
+            <td>
+                <button class="btn btn-danger" (click)="delete(product.key)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<!-- <button (click)="show()"class="btn btn-primary">show</button> -->

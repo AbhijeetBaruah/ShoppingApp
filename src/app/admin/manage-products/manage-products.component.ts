@@ -53,6 +53,7 @@ export class ManageProductsComponent implements OnInit,OnDestroy {
       pagingType: 'full_numbers',
       pageLength: 4,
       autoWidth:false,
+      searching:false,
     
       columnDefs:[
         {

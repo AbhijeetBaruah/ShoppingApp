@@ -12,7 +12,7 @@
         <li ngbDropdown class="nav-item dropdown show">
           <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Category</a>
           <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
-            <a (click)="show($any(category.payload.val()).name)" *ngFor="let category of categories$ | async" ngbDropdownItem class="dropdown-item">
+            <a (click)="show(category.key)" *ngFor="let category of categories$ | async" ngbDropdownItem class="dropdown-item">
               {{$any(category.payload.val()).name}}
             </a>
           </div>

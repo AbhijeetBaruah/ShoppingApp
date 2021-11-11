@@ -5,7 +5,7 @@
     object-fit: cover;
 }
 .card-body{
-    padding: 8px 10px 8px 20px;
+    padding: 8px 15px 8px 15px;
     background-color: rgb(240, 236, 231);
 }
 .oneBox{
@@ -13,4 +13,8 @@
 }
 .details{
     margin-left: 8px;
+}
+.btn-primary{
+    padding-left: -10px;
+    width: 100%;
 }

@@ -41,8 +41,6 @@ export class BsNavbarComponent implements OnInit,OnDestroy {
 
   show(data:any){
 
-    console.log(data);
-
     this.router.navigate([''],{queryParams:{category:data}})
     
   }

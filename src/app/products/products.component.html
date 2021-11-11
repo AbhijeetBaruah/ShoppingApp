@@ -1,1 +1,29 @@
-<p>products works!</p>
+
+
+<div class="row">
+    <ng-container  *ngFor="let product of products;let i = index" class="card" >
+        <div class="col-md-3 col-sm-6 oneBox">
+            <img *ngIf="product.ImageUrl" [src]="product.ImageUrl" class="card-img-top" alt="Product Image">
+            <img *ngIf="!product.ImageUrl" class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Solid_grey.svg/768px-Solid_grey.svg.png" alt="Sample">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col details">
+                        <div class="row">{{product.Title}}</div>
+                        <div class="row">{{product.Price | currency:'INR':true}} </div>
+                    </div>
+                </div>
+                <div>
+                    <button routerLink="#" class="btn btn-primary">Add to Cart</button>
+                </div>
+              <!-- <h5 class="card-title"> </h5>
+              <p class="card-text"></p> -->
+            </div>
+        </div>
+        <div *ngIf=" ( i+1 ) % 4 == 0" class="w-100"></div>
+    </ng-container>
+</div>
+
+
+
+
+

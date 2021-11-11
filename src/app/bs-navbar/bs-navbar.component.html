@@ -9,6 +9,20 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/shopping-cart">Cart</a>
         </li>
+        <li ngbDropdown class="nav-item dropdown show">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Category</a>
+          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
+            <a (click)="show($any(category.payload.val()).name)" *ngFor="let category of categories$ | async" ngbDropdownItem class="dropdown-item">
+              {{$any(category.payload.val()).name}}
+            </a>
+          </div>
+          <!-- <select #data (click)="show(data.value)" name="Category">
+            <option value=""></option>
+            <option *ngFor="let category of categories$ | async" [value]="category.key">
+                {{$any(category.payload.val()).name}}
+            </option>
+        </select> -->
+        </li>
         <li *ngIf="!username" class="nav-item">
             <a class="nav-link" routerLink="/login">Login</a>
           </li>

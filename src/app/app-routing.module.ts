@@ -15,7 +15,7 @@ import { RoleProviderComponent } from './role-provider/role-provider.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
-  {path:'',component:HomeComponent},
+  {path:'',component:ProductsComponent},
   {path:'products',component:ProductsComponent},
   {path:'shopping-cart',component:ShoppingCartComponent},
   {path:'login',component:LoginComponent},

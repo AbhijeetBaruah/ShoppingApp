@@ -1,0 +1,16 @@
+.card-img-top{
+    width: 100%;
+    background-color: blanchedalmond;
+    height: 30vh;
+    object-fit: cover;
+}
+.card-body{
+    padding: 8px 10px 8px 20px;
+    background-color: rgb(240, 236, 231);
+}
+.oneBox{
+    margin-bottom: 15px;
+}
+.details{
+    margin-left: 8px;
+}

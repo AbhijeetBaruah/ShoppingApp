@@ -29,6 +29,8 @@ import { CategoryService } from './services/category/category.service';
 import { ProductService } from './services/product/product.service';
 import { CustomFormsModule } from 'ng2-validation';
 import { DataTablesModule } from 'angular-datatables';
+import { CartComponent } from './bs-navbar/cart/cart/cart.component';
+import { ShoppingButtonComponent } from './common/shopping-button/shopping-button.component';
 
 
 @NgModule({
@@ -45,7 +47,9 @@ import { DataTablesModule } from 'angular-datatables';
     ManageOrdersComponent,
     LoginComponent,
     RoleProviderComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    CartComponent,
+    ShoppingButtonComponent
   ],
   imports: [
     BrowserModule,

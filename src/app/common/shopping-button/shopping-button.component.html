@@ -1,0 +1,11 @@
+<div class="row updateQuantity">
+    <div class=" col-md-2 col-sm-4 col-3 common" >
+        <button (click)="addToCart(-1)" class="btn btn-secondary btn-block">-</button>
+    </div>
+    <div class="col-md-8 col-sm-4 col-6 text-center" >
+        {{getQuantity()}} in cart
+    </div>
+    <div class=" col-md-2 col-sm-4 col-3 common" >
+        <button (click)="addToCart(1)" class="btn btn-secondary btn-block">+</button>
+    </div>
+</div>

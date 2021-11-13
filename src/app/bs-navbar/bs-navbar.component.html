@@ -3,6 +3,8 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <cart></cart>
   
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
@@ -16,12 +18,6 @@
               {{$any(category.payload.val()).name}}
             </a>
           </div>
-          <!-- <select #data (click)="show(data.value)" name="Category">
-            <option value=""></option>
-            <option *ngFor="let category of categories$ | async" [value]="category.key">
-                {{$any(category.payload.val()).name}}
-            </option>
-        </select> -->
         </li>
         <li *ngIf="!username" class="nav-item">
             <a class="nav-link" routerLink="/login">Login</a>

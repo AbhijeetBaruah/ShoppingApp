@@ -31,11 +31,13 @@ export class ShoppingCartComponent implements OnInit,OnDestroy {
                                   this.sum=0;
                                   this.productIds=[]
                                   this.cart=cartObject;
-                                  for(let productId in cartObject.items){
-                                    this.productIds?.push(productId);
-                                    this.sum = this.sum+ cartObject.items[productId].quantity*parseInt(cartObject.items[productId].product.Price as string);
+                                  if(this.cart){
+                                    for(let productId in cartObject.items){
+                                      this.productIds?.push(productId);
+                                      this.sum = this.sum+ cartObject.items[productId].quantity*parseInt(cartObject.items[productId].product.Price as string);
+                                    }
+                                    this.cartItems = cartObject.items;
                                   }
-                                  this.cartItems = cartObject.items;
                                 }
                               )
                               
@@ -44,6 +46,15 @@ export class ShoppingCartComponent implements OnInit,OnDestroy {
 
   getPrice(productId:any){
     return this.cartItems[productId].quantity*parseInt(this.cartItems[productId].product.Price as string);
+  }
+
+  clearCart(){
+    if(confirm("Sure to Clear the Cart?")){
+      this.shoppingCartService.clearCart();
+    }else{
+      console.log("did not clear");
+      
+    }
   }
 
   ngOnDestroy(){

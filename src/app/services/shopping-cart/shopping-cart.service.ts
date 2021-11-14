@@ -8,8 +8,7 @@ import { ShoppingCart } from 'src/app/model/shopping-cart';
 @Injectable({
   providedIn: 'root'
 })
-export class ShoppingCartService {
-  
+export class ShoppingCartService {  
 
 
   constructor(private db:AngularFireDatabase) { }
@@ -18,6 +17,11 @@ export class ShoppingCartService {
     return this.db.list('/shopping-carts').push(
       {dateCreated: new Date().getTime()}
     );
+  }
+
+  async clearCart() {
+    let cartId = await this.getOrCreateCart();
+    this.db.object("shopping-carts/"+cartId+"/items/").remove()
   }
 
   async getCart():Promise<Observable<ShoppingCart>>{
@@ -33,10 +37,14 @@ export class ShoppingCartService {
     var subject = new Subject<number>();
     (await this.getCart()).subscribe(cart=>{
       let count:number=0;
-      for(let productId in cart.items){
-        count = cart.items[productId].quantity+count;
+      if(cart){
+        for(let productId in cart.items){
+          count = cart.items[productId].quantity+count;
+        }
+        subject.next(count);
+      }else{
+        subject.next(0);
       }
-      subject.next(count);
     });
     return subject;
   }

@@ -1,23 +1,32 @@
 <h1>Shopping Cart</h1>
-<p>You have {{count}} items in your cart</p>
+<p>You have {{count}} items in your cart
+    <button *ngIf="count>0" type="button" class="btn btn-light" (click)="clearCart()">Clear Cart</button>
+</p>
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
+            <th class="text-center" style="width: 230px;">Quantity</th>
+            <th class="text-right" style="width: 200px;">Price</th>
         </tr>
     </thead>
     <tbody *ngIf="cartItems && productIds">
         <tr *ngFor="let productId of productIds">
+            <td>
+                <div class="thumbnail" [style.backgroundImage]="'url('+cartItems[productId].product.ImageUrl+')'"></div>
+            </td>
             <td >{{cartItems[productId].product.Title}} </td>
             <td> <shopping-button [product]="cartItems[productId].product" [cart]="cart"></shopping-button> </td>
-            <td> {{ getPrice(productId) | currency:'INR' }} </td>
+            <td class="text-right"> {{ getPrice(productId) | currency:'INR' }} </td>
         </tr>
     </tbody>
     <tfoot><tr>
+        <td></td>
         <td><b>Total Amount</b></td>
         <td></td>
-        <td><b>{{sum | currency:'INR'}}</b> </td>
+        <td class="text-right"><b>{{sum | currency:'INR'}}</b> </td>
     </tr> </tfoot>
 </table>
+<a *ngIf="count>0" routerLink="/check-out" class="btn btn-primary">Check Out</a>
+

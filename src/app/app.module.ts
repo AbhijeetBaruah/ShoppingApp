@@ -31,6 +31,9 @@ import { CustomFormsModule } from 'ng2-validation';
 import { DataTablesModule } from 'angular-datatables';
 import { CartComponent } from './bs-navbar/cart/cart/cart.component';
 import { ShoppingButtonComponent } from './common/shopping-button/shopping-button.component';
+import { OrderService } from './services/order/order.service';
+import { ShoppingCartService } from './services/shopping-cart/shopping-cart.service';
+import { AdminGuard } from './admin/admin-guard/admin-guard.service';
 
 
 @NgModule({
@@ -66,9 +69,12 @@ import { ShoppingButtonComponent } from './common/shopping-button/shopping-butto
   providers: [
     AuthService,
     AuthGuard,
+    AdminGuard,
     UserService,
     CategoryService,
-    ProductService
+    ProductService,
+    OrderService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })

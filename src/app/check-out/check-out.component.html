@@ -1,1 +1,41 @@
-<p>check-out works!</p>
+<h1>Shipping...</h1>
+<div class="col-8">
+    <form #form="ngForm" (ngSubmit)="save(form.value)">
+
+        <!-- Name -->
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input #name="ngModel" [(ngModel)]="consumerOrder.Name" name="Name" required type="text" id="name" class="form-control">
+            <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+                Name is required
+            </div>
+        </div>
+
+        <!-- address -->
+        <div class="form-group">
+            <label for="address">Address</label>
+            <input #address="ngModel" required [(ngModel)]="consumerOrder.Address" name="Address" required type="text" id="address" class="form-control" minlength="1">
+            <div class="alert alert-danger" *ngIf="address.touched && address.errors">
+                <div *ngIf="address.errors.required">address is required</div>
+                <div *ngIf="address.errors.minlength">Please enter a valid address</div>
+            </div>
+        </div>
+
+        <!-- City -->
+        <div class="form-group">
+            <label for="city">City</label>
+            <!--we are using external library ng2-validations for 'url' validation-->
+            <input #city="ngModel" [(ngModel)]="consumerOrder.City" name="City" required minlength="1" type="text" id="city" class="form-control">
+            <div class="alert alert-danger" *ngIf="city.touched && city.errors">
+                <div *ngIf="city.errors.required">City is required</div>
+                <div *ngIf="city.errors.minlength">Please enter a valid city</div>
+            </div>
+        </div>
+        
+        <button [disabled]="!form.valid" type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+
+
+    
+

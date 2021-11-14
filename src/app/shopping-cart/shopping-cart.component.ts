@@ -49,6 +49,7 @@ export class ShoppingCartComponent implements OnInit,OnDestroy {
   }
 
   clearCart(){
+    
     if(confirm("Sure to Clear the Cart?")){
       this.shoppingCartService.clearCart();
     }else{

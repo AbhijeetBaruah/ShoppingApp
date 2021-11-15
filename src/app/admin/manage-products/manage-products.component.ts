@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { ProductService } from 'src/app/services/product/product.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { ProductModel } from 'src/app/model/product-model';
+import { ProductModel } from 'src/app/common/model/product-model';
 
 @Component({
   selector: 'app-manage-products',

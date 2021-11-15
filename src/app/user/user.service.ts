@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import firebase from 'firebase/app'
 import { Observable, of } from 'rxjs';
-import { IUser } from '../model/user-model';
+import { IUser } from '../common/model/user-model';
 import { RoleData } from '../role-provider/roledata';
 
 @Injectable({

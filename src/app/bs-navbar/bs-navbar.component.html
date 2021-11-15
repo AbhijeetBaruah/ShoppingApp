@@ -1,35 +1,37 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
     <a class="navbar-brand" routerLink="/">ShopBuzz</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <a routerLink="/shopping-cart" style="color: black;" ><cart></cart></a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <cart></cart>
-  
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/shopping-cart">Cart</a>
+          <a class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" routerLink="/shopping-cart">Cart</a>
         </li>
         <li ngbDropdown class="nav-item dropdown show">
           <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-expanded="false">Category</a>
           <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
-            <a (click)="show(category.key)" *ngFor="let category of categories$ | async" ngbDropdownItem class="dropdown-item">
+            <a data-toggle="collapse" data-target=".navbar-collapse.show" (click)="show(category.key)" *ngFor="let category of categories$ | async" ngbDropdownItem class="dropdown-item">
               {{$any(category.payload.val()).name}}
             </a>
           </div>
         </li>
+      </ul>
+
+      <ul class="navbar-nav" style="padding-right: 40px;">
         <li *ngIf="!username" class="nav-item">
-            <a class="nav-link" routerLink="/login">Login</a>
-          </li>
+          <a data-toggle="collapse" data-target=".navbar-collapse.show" class="nav-link" routerLink="/login">Login</a>
+        </li>
         <li *ngIf="username" ngbDropdown class="nav-item dropdown show">
           <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-expanded="false">{{username.displayName}} </a>
           <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
-            <a ngbDropdownItem class="dropdown-item" routerLink="/my/orders">My Orders</a>
-            <a ngbDropdownItem *ngIf="isAdminVar" class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
-            <a ngbDropdownItem  *ngIf="isAdminVar" class="dropdown-item" routerLink="/admin/products">Manage Products</a>
-            <a ngbDropdownItem class="dropdown-item" routerLink="/roleprovider">Role Provider</a>
-            <a ngbDropdownItem class="dropdown-item" (click)="logout()" >Log Out</a>
+            <a data-toggle="collapse" data-target=".navbar-collapse.show" ngbDropdownItem class="dropdown-item" routerLink="/my/orders">My Orders</a>
+            <a data-toggle="collapse" data-target=".navbar-collapse.show" ngbDropdownItem *ngIf="isAdminVar" class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
+            <a data-toggle="collapse" data-target=".navbar-collapse.show" ngbDropdownItem  *ngIf="isAdminVar" class="dropdown-item" routerLink="/admin/products">Manage Products</a>
+            <a data-toggle="collapse" data-target=".navbar-collapse.show" ngbDropdownItem class="dropdown-item" routerLink="/roleprovider">Role Provider</a>
+            <a data-toggle="collapse" data-target=".navbar-collapse.show" ngbDropdownItem class="dropdown-item" (click)="logout()" >Log Out</a>
           </div>
         </li>
       </ul>

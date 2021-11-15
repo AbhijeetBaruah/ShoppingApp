@@ -4,8 +4,8 @@ import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { StringLiteralLike } from 'typescript';
 import { AuthService } from '../auth/auth-service/auth.service';
-import { Consumer } from '../model/consumer';
-import { ShoppingCartItem } from '../model/shopping-cart-item';
+import { Consumer } from '../common/model/consumer';
+import { ShoppingCartItem } from '../common/model/shopping-cart-item';
 import { OrderService } from '../services/order/order.service';
 import { ShoppingCartService } from '../services/shopping-cart/shopping-cart.service';
 

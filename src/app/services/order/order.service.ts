@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Consumer } from 'src/app/model/consumer';
+import { Consumer } from 'src/app/common/model/consumer';
 import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
 
 @Injectable({

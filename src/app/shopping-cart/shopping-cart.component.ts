@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ShoppingCart } from '../model/shopping-cart';
-import { ShoppingCartItem } from '../model/shopping-cart-item';
+import { AppComponent } from '../app.component';
+import { ShoppingCart } from '../common/model/shopping-cart';
+import { ShoppingCartItem } from '../common/model/shopping-cart-item';
 import { ShoppingCartService } from '../services/shopping-cart/shopping-cart.service';
 
 @Component({
@@ -19,28 +20,24 @@ export class ShoppingCartComponent implements OnInit,OnDestroy {
   productIds:any[]=[];
   cartItems:ShoppingCartItem[]=[];
   cart:any;
-  constructor(private shoppingCartService:ShoppingCartService) { }
+  constructor(private shoppingCartService:ShoppingCartService,private appComponent:AppComponent) { }
 
   async ngOnInit() {
-    this.subscription1 =(await this.shoppingCartService.getTotalCountofItems()).subscribe(
-      object=>this.count=object.valueOf()
-    )
 
-    this.subscription2 = (await this.shoppingCartService.getCart()).subscribe(
-                                cartObject =>{
-                                  this.sum=0;
-                                  this.productIds=[]
-                                  this.cart=cartObject;
-                                  if(this.cart){
-                                    for(let productId in cartObject.items){
-                                      this.productIds?.push(productId);
-                                      this.sum = this.sum+ cartObject.items[productId].quantity*parseInt(cartObject.items[productId].product.Price as string);
-                                    }
-                                    this.cartItems = cartObject.items;
-                                  }
-                                }
-                              )
-                              
+    this.subscription1=this.appComponent.cartValue(1).subscribe(cart=>{
+      this.cart=cart;
+      this.productIds=[]
+      this.count=0
+      this.sum=0
+      for(let productId in cart.items){
+        this.count = cart.items[productId].quantity+this.count;
+      }
+      for(let productId in cart.items){
+        this.productIds?.push(productId);
+        this.sum = this.sum+ cart.items[productId].quantity*parseInt(cart.items[productId].product.Price as string);
+      }
+      this.cartItems = cart.items;
+    })        
 
   }
 

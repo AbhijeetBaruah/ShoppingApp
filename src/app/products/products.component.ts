@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ProductModel } from '../model/product-model';
-import { ShoppingCart } from '../model/shopping-cart';
+import { AppComponent } from '../app.component';
+import { ProductModel } from '../common/model/product-model';
 import { CategoryService } from '../services/category/category.service';
 import { ProductService } from '../services/product/product.service';
 import { ShoppingCartService } from '../services/shopping-cart/shopping-cart.service';
@@ -20,15 +20,16 @@ export class ProductsComponent implements OnInit,OnDestroy {
   subscription2?:Subscription;
   categories$:any;
   categoryParam?:string;
-  cart?:any;
+  cart:any;
 
   constructor(private productService:ProductService,
               private categoryService:CategoryService,
               private activatedRoute:ActivatedRoute,
-              private shoppingCartService:ShoppingCartService) {
+              private shoppingCartService:ShoppingCartService,
+              private appComponent:AppComponent) {
     this.getAllProduct();
     this.getCategories();
-
+    
     
   }
 
@@ -57,6 +58,7 @@ export class ProductsComponent implements OnInit,OnDestroy {
 
   getQuantity(product:ProductModel){
     if(!this.cart) return 0;
+    if(!this.cart.items) return 0;
     let item = this.cart.items[product.key as string];
     return item ? item.quantity : 0;
   }
@@ -70,12 +72,13 @@ export class ProductsComponent implements OnInit,OnDestroy {
     this.subscription2?.unsubscribe();
   }
 
-  async ngOnInit() {
-    this.subscription2 = (await this.shoppingCartService.getCart()).subscribe(
-      cart =>{
-        this.cart = cart;
-      }
-    );  
+  ngOnInit() {
+    // this.subscription2 = (await this.shoppingCartService.getCart()).subscribe(
+    //   cart =>{
+    //     this.cart = cart;
+    //   }
+    // );  
+    this.subscription2=this.appComponent.cartValue(1).subscribe(cart=>this.cart=cart);
   }
 
 }

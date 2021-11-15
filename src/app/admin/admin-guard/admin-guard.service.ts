@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth-service/auth.service';
 
 import { filter, map, switchMap, switchMapTo } from 'rxjs/operators'
-import { IUser } from 'src/app/model/user-model';
+import { IUser } from 'src/app/common/model/user-model';
 import { UserService } from 'src/app/user/user.service';
 
 @Injectable({

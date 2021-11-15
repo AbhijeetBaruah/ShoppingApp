@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ShoppingCart } from 'src/app/model/shopping-cart';
-import { ShoppingCartItem } from 'src/app/model/shopping-cart-item';
+import { from, Subscription } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
+import { ShoppingCart } from 'src/app/common/model/shopping-cart';
+import { ShoppingCartItem } from 'src/app/common/model/shopping-cart-item';
 import { ShoppingCartService } from 'src/app/services/shopping-cart/shopping-cart.service';
 
 @Component({
@@ -11,22 +12,34 @@ import { ShoppingCartService } from 'src/app/services/shopping-cart/shopping-car
 })
 export class CartComponent implements OnInit {
 
-  count:number=0;
+  count?:number=0;
   items:ShoppingCartItem[]=[]
   cart:ShoppingCart={items:this.items};
-  subscription?:Subscription
+  subscription?:Subscription;
+  cardIdExist:boolean=false;
 
-  constructor(private shoppingCartService:ShoppingCartService) { 
+  constructor(private shoppingCartService:ShoppingCartService,private appComponent:AppComponent) {      
     
   }
   
 
-  async ngOnInit(){
-   (await this.shoppingCartService.getTotalCountofItems()).subscribe(
-     object =>{
-       this.count = object.valueOf()
-     }
-   )
+  ngOnInit(){
+
+    this.appComponent.cartValue().subscribe(cart=>{
+      this.cart=cart;
+      this.count=0
+      for(let productId in cart.items){
+        this.count = cart.items[productId].quantity+this.count;
+      }
+    })
+    
+    
+    // (await this.shoppingCartService.getTotalCountofItems()).subscribe(
+    //   object =>{console.log("inside cart");
+    //              this.count = object.valueOf()
+    //             }
+    // )
+   
   }
 
 }

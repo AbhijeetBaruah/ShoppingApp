@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { ProductService } from 'src/app/services/product/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductModel } from 'src/app/model/product-model';
+import { ProductModel } from 'src/app/common/model/product-model';
 import { Subscription } from 'rxjs';
 
 

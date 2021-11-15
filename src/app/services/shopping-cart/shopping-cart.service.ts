@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, SnapshotAction } from '@angular/fire/database';
-import { ProductModel } from 'src/app/model/product-model';
+import { ProductModel } from 'src/app/common/model/product-model';
 import { take } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
-import { ShoppingCart } from 'src/app/model/shopping-cart';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { ShoppingCart } from 'src/app/common/model/shopping-cart';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {  
 
+  private cardIdStatus = new BehaviorSubject(false);
+  getcardIdStatus = this.cardIdStatus.asObservable();
 
   constructor(private db:AngularFireDatabase) { }
 
@@ -33,17 +35,40 @@ export class ShoppingCartService {
     return this.db.object('/shopping-carts/'+cartId+'/items/'+productKey);
   }
 
-  async getTotalCountofItems():Promise<Subject<number>>{
+  getTotalItems(){
+    var subject1 = new Subject<number>();
+    let cartId = localStorage.getItem('cartId');
+    if(cartId){
+      this.db.object('/shopping-carts/'+cartId).valueChanges().subscribe((cart:any)=>{
+        if(cart){
+          let count=0;
+          for(let productId in cart.items){
+            count = cart.items[productId].quantity+count;
+          }
+          console.log("inside getTotal ->"+count);
+          
+          subject1.next(count);
+          
+        }
+      });
+    }
+    return subject1;
+  }
+
+  async getTotalCountofItems(cardIdExist?:boolean):Promise<Subject<number>>{
     var subject = new Subject<number>();
+    
+    
     (await this.getCart()).subscribe(cart=>{
-      let count:number=0;
       if(cart){
+        let count=0;
         for(let productId in cart.items){
           count = cart.items[productId].quantity+count;
         }
+        console.log("inside getTotal");
+        
         subject.next(count);
-      }else{
-        subject.next(0);
+        
       }
     });
     return subject;
@@ -56,6 +81,9 @@ export class ShoppingCartService {
 
         let result = await this.createCart()
         if(result.key){
+          this.cardIdStatus.next(true);
+          console.log(this.cardIdStatus.value+" from getOrCreate");
+          
           localStorage.setItem('cartId',result.key ? result.key:'');
           return result.key;
         }else throw new Error("Failed to Create a cart");

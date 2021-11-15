@@ -74,7 +74,8 @@ import { AdminGuard } from './admin/admin-guard/admin-guard.service';
     CategoryService,
     ProductService,
     OrderService,
-    ShoppingCartService
+    ShoppingCartService,
+    AppComponent
   ],
   bootstrap: [AppComponent]
 })

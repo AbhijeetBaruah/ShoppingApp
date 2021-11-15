@@ -4,3 +4,9 @@
 #dropdown-item{
     cursor: pointer;
 }
+.navbar-toggler{
+    float: right;
+}
+cart{
+    float:left;
+}

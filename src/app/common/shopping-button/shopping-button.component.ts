@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ProductModel } from 'src/app/model/product-model';
-import { ShoppingCart } from 'src/app/model/shopping-cart';
+import { ProductModel } from 'src/app/common/model/product-model';
+import { ShoppingCart } from 'src/app/common/model/shopping-cart';
 import { ShoppingCartService } from 'src/app/services/shopping-cart/shopping-cart.service';
 
 @Component({

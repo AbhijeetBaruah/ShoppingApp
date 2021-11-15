@@ -2,16 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, SnapshotAction } from '@angular/fire/database';
 import { ProductModel } from 'src/app/common/model/product-model';
 import { take } from 'rxjs/operators';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { ShoppingCart } from 'src/app/common/model/shopping-cart';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {  
-
-  private cardIdStatus = new BehaviorSubject(false);
-  getcardIdStatus = this.cardIdStatus.asObservable();
 
   constructor(private db:AngularFireDatabase) { }
 
@@ -36,53 +33,27 @@ export class ShoppingCartService {
     return this.db.object('/shopping-carts/'+cartId+'/items/'+productKey);
   }
 
-  getTotalItems(){
-    var subject1 = new Subject<number>();
-    let cartId = localStorage.getItem('cartId');
-    if(cartId){
-      this.db.object('/shopping-carts/'+cartId).valueChanges().subscribe((cart:any)=>{
-        if(cart){
-          let count=0;
-          for(let productId in cart.items){
-            count = cart.items[productId].quantity+count;
-          }
-          
-          subject1.next(count);
-          
-        }
-      });
-    }
-    return subject1;
-  }
-
-  async getTotalCountofItems(cardIdExist?:boolean):Promise<Subject<number>>{
-    var subject = new Subject<number>();
+  checkCartIdExistOnFirebase(cartId:any){
+    var subject=new Subject()
     
-    
-    (await this.getCart()).subscribe(cart=>{
-      if(cart){
-        let count=0;
-        for(let productId in cart.items){
-          count = cart.items[productId].quantity+count;
-        }
-        
-        subject.next(count);
-        
-      }
-    });
-    return subject;
+     this.db.object('/shopping-carts/'+cartId).snapshotChanges().pipe(take(1)).subscribe(
+       cart=>cart.payload.exists()?subject.next(true):subject.next(false)
+     );
+     return subject ;
   }
 
   private async getOrCreateCart(){
     let cartId = localStorage.getItem('cartId');
-    try {
-      if(!cartId){
+    let exist;
+    try {     
+
+      await this.checkCartIdExistOnFirebase(cartId).pipe(take(1)).toPromise().then(data=>exist=data);
+      
+      if(!exist){        
 
         let result = await this.createCart()
         if(result.key){
-          this.cardIdStatus.next(true);
-          
-          localStorage.setItem('cartId',result.key ? result.key:'');
+          localStorage.setItem('cartId',result.key);
           return result.key;
         }else throw new Error("Failed to Create a cart");
 

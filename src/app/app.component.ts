@@ -10,7 +10,6 @@ import { ShoppingCartService } from './services/shopping-cart/shopping-cart.serv
 export class AppComponent implements OnInit {
   title = 'ShoppingApp';
 
-  called=0;
   private cart: Subject<any> = new Subject();
   constructor(private shoppingCartService:ShoppingCartService){}
 
@@ -22,6 +21,7 @@ export class AppComponent implements OnInit {
 
   private async init(){
     (await this.shoppingCartService.getCart()).subscribe(cart=>this.cart.next(cart))
+    return this.cart;
   }
 
   ngOnInit() {

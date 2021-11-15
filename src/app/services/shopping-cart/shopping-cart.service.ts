@@ -24,6 +24,7 @@ export class ShoppingCartService {
   async clearCart() {
     let cartId = await this.getOrCreateCart();
     this.db.object("shopping-carts/"+cartId+"/items/").remove()
+    
   }
 
   async getCart():Promise<Observable<ShoppingCart>>{
@@ -45,7 +46,6 @@ export class ShoppingCartService {
           for(let productId in cart.items){
             count = cart.items[productId].quantity+count;
           }
-          console.log("inside getTotal ->"+count);
           
           subject1.next(count);
           
@@ -65,7 +65,6 @@ export class ShoppingCartService {
         for(let productId in cart.items){
           count = cart.items[productId].quantity+count;
         }
-        console.log("inside getTotal");
         
         subject.next(count);
         
@@ -82,7 +81,6 @@ export class ShoppingCartService {
         let result = await this.createCart()
         if(result.key){
           this.cardIdStatus.next(true);
-          console.log(this.cardIdStatus.value+" from getOrCreate");
           
           localStorage.setItem('cartId',result.key ? result.key:'');
           return result.key;

@@ -15,7 +15,6 @@ export class AppComponent implements OnInit {
   constructor(private shoppingCartService:ShoppingCartService){}
 
   cartValue(val?:number){
-    console.log(this.cart);
     if(val==1)
       this.init();
     return this.cart.asObservable();

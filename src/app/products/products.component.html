@@ -3,8 +3,8 @@
 <div class="row">
     <ng-container  *ngFor="let product of filteredProducts;let i = index" class="card" >
         <div class="col-md-4 col-sm-4 oneBox">
-            <img *ngIf="product.ImageUrl" [src]="product.ImageUrl" class="card-img-top" alt="Product Image">
-            <img *ngIf="!product.ImageUrl" class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Solid_grey.svg/768px-Solid_grey.svg.png" alt="Sample">
+            <img loading="lazy" *ngIf="product.ImageUrl" [src]="product.ImageUrl" class="card-img-top" alt="Product Image">
+            <img loading="lazy" *ngIf="!product.ImageUrl" class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Solid_grey.svg/768px-Solid_grey.svg.png" alt="Sample">
             <div class="card-body">
                 <div class="row">
                     <div class="col details">
